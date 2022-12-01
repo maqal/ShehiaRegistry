@@ -1,0 +1,17 @@
+<!-- option one -->
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-sm-12" id="map">
+            <div *ngIf="apiLoaded | async">
+                <google-map [options]="options"></google-map>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- option two -->
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="12">
+    <agm-marker  [latitude]="lat" [longitude]="lng"></agm-marker>
+</agm-map>
+
+<!-- <google-map></google-map> -->
