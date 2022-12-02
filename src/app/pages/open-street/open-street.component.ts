@@ -20,7 +20,7 @@ export class OpenStreetComponent implements OnInit, AfterViewInit {
   }
 
   private initMap(): void {
-    this.map = L.map('map').setView([-6.140555, 39.336548], 10);
+    this.map = L.map('map').setView([-6.140555, 39.336548], 12);
     const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 30,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'

@@ -1,5 +1,6 @@
+import { AgmMap } from '@agm/core';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { MapService } from 'src/app/services/map.service';
@@ -9,12 +10,16 @@ import { MapService } from 'src/app/services/map.service';
   templateUrl: './google-map.component.html',
   styleUrls: ['./google-map.component.css']
 })
-export class GoogleMapComponent implements OnInit{
+export class GoogleMapComponent implements OnInit, AfterViewInit {
   // apiLoaded: Observable<boolean>;
   map!: google.maps.Map;
   lat = -6.140555;
   lng = 39.336548;
-  markers!: [];
+  markers!: any[];
+  mark!: google.maps.Marker;
+
+  latPoint: any;
+  lonPoint: any;
 
   constructor(http: HttpClient, private mapServ: MapService) {
     // this.apiLoaded = http.jsonp('https://maps.googleapis.com/maps/api/js?key=AIzaSyDFaXNvUSNlqQoqlNBgCgppWcSeYxb5kDM', 'callback')
@@ -29,22 +34,18 @@ export class GoogleMapComponent implements OnInit{
   //   zoom: 8,
   // };
 
+  // @ViewChild('mapContainer', {static: false}) gmap: ElementRef;
+
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit(): void {
     this.loadMarkers();
   }
-  
-  loadMarkers(){
-    this.mapServ.getData().subscribe((response) => {
+
+  loadMarkers() {
+    this.mapServ.getData().subscribe((response: any[]) => {
       this.markers = response;
-      // for( var i = 0; i <= this.markers.length; i++){
-      //   let l = this.markers.lat;
-      //   let ln = this.markers.lon;
-      //   const mark = new google.maps.Marker({
-      //     position: {this.markers.lat, this.markers.lng}
-      //   })
-      // }
-      console.log(response);
-      
     })
   }
 }
